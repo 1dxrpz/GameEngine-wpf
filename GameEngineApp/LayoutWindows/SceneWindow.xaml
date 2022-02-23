@@ -1,0 +1,13 @@
+﻿<UserControl x:Class="GameEngineApp.LayoutWindows.SceneWindow"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:GameEngineApp.LayoutWindows"
+             mc:Ignorable="d" Width="1526.5" Height="860.909">
+    <Grid Background="Gray" Height="861">
+        <Canvas x:Name="sceneCanvas" AllowDrop="True" Drop="Canvas_Drop" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Rectangle Fill="AliceBlue" Width="1000" Height="600" Canvas.Left="-500" Canvas.Top="-300" HorizontalAlignment="Left" VerticalAlignment="Top" />
+        </Canvas>
+    </Grid>
+</UserControl>

@@ -1,0 +1,180 @@
+﻿<Window x:Class="GameEngineApp.StartWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:GameEngineApp"
+        xmlns:core="clr-namespace:GameEngineApp.Core" 
+        mc:Ignorable="d"
+        Title="StartWindow" Height="800" Width="1200" 
+        MinHeight="450" MinWidth="800"
+        >
+    <WindowChrome.WindowChrome>
+        <WindowChrome GlassFrameThickness="10" CornerRadius="0" CaptionHeight="0" UseAeroCaptionButtons="False" ResizeBorderThickness="7"/>
+    </WindowChrome.WindowChrome>
+    <Window.Resources>
+        <Style TargetType="{x:Type TabControl}">
+            <Setter Property="TabStripPlacement" Value="Left" />
+            <Setter Property="Margin" Value="0" />
+            <Setter Property="Padding" Value="0"/>
+        </Style>
+        <Style TargetType="TabItem">
+            <Setter Property="FontSize" Value="10"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="FontSize" Value="15pt"/>
+            <Setter Property="FontWeight" Value="500"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TabItem}">
+                        <Border x:Name="PART_Border" Background="{TemplateBinding Background}"
+                                BorderThickness="0"
+                                Padding=" 30, 5, 100, 5"
+                                Margin="-2, -2, 0, 0">
+                            <ContentPresenter ContentSource="Header" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter Property="Background" Value="GhostWhite"/>
+                                <Setter Property="Foreground" Value="#000"/>
+                            </Trigger>
+                            <Trigger Property="IsSelected" Value="false">
+                                <Setter Property="Background" Value="Transparent"/>
+                                <Setter Property="Foreground" Value="gray"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style TargetType="ListBoxItem">
+            <Setter Property="HorizontalContentAlignment" Value="Stretch"></Setter>
+
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                        <Grid Name="Bd" Background="{TemplateBinding Background}">
+                            <TextBlock Text="{Binding ProjectName}"
+                                Width="400"
+                                Height="35"
+                                TextWrapping="WrapWithOverflow"
+                                TextTrimming="CharacterEllipsis"
+                                TextAlignment="Left"
+                                HorizontalAlignment="Left"
+                                Margin="80, 5, 0, 0"/>
+                            <TextBlock
+                                Background="Transparent"
+                                Text="{Binding Path}"
+                                TextAlignment="Right"
+                                HorizontalAlignment="Right"
+                                Width="400"
+                                Height="35"
+                                TextWrapping="WrapWithOverflow"
+                                TextTrimming="CharacterEllipsis"
+                                Margin="0, 5, 0, 0"></TextBlock>
+                            <Button Background="Transparent" BorderThickness="0" Width="25" Height="25" Margin="0, 5, 0, 0" HorizontalAlignment="Left" VerticalAlignment="Top">
+                                <Image Source="pack://application:,,,/GameEngineApp;component/Images/delete.png"></Image>
+                            </Button>
+                            <Button Background="Transparent" BorderThickness="0" Width="25" Height="25" Margin="40, 5, 0, 0" HorizontalAlignment="Left" VerticalAlignment="Top">
+                                <Image Source="pack://application:,,,/GameEngineApp;component/Images/settings.png"></Image>
+                            </Button>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="ItemsControl.AlternationIndex" Value="0">
+                                <Setter TargetName="Bd" Property="Background" Value="#05000000" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    <Grid Margin="0" Background="#252526" x:Name="MainGrid">
+        <Grid.Effect>
+            <DropShadowEffect BlurRadius="20" Direction="-90"
+                              RenderingBias="Quality" ShadowDepth=".1" Opacity=".5"/>
+        </Grid.Effect>
+        <Border BorderBrush="#55ffffff" BorderThickness="0">
+            <Grid>
+                <TabControl Background="GhostWhite" BorderThickness="0" Margin="0,76,0,0" FontFamily="Lato">
+                    <TabItem Name="TabItem1" Header="Projects">
+                        <Grid>
+                            <ListBox Background="Transparent"
+                                     BorderThickness="0"
+                                     x:Name="ProjectsList"
+                                     Margin="10,10,10,54"
+                                     ItemsSource="{Binding ProjectInfos}"
+                                     AlternationCount="2">
+                            </ListBox>
+                            <Button 
+                                Content="Create new Project"
+                                Click="CreateNewProject"
+                                Margin="0,0,10,10"
+                                RenderTransformOrigin="0.5,0.5"
+                                VerticalAlignment="Bottom"
+                                HorizontalAlignment="Right">
+                                <Button.Resources>
+                                    <Style TargetType="Button">
+                                        <Setter Property="BorderThickness" Value="0"></Setter>
+                                        <Setter Property="Background" Value="#333"></Setter>
+                                        <Setter Property="Foreground" Value="#eee"></Setter>
+                                        <Setter Property="FontSize" Value="10pt"></Setter>
+                                        <Setter Property="FontWeight" Value="400"></Setter>
+                                        <Setter Property="Padding" Value="20, 5, 20, 5"></Setter>
+                                    </Style>
+                                </Button.Resources>
+                            </Button>
+                        </Grid>
+                    </TabItem>
+                    <TabItem Name="TabItem2" Header="Documentation" >
+
+                    </TabItem>
+                    <TabItem Name="TabItem3" Header="Settings" >
+
+                    </TabItem>
+                </TabControl>
+                <Button HorizontalAlignment="Right" VerticalAlignment="Top" Width="44" Click="Shutdown" Height="24" Margin="0,8,6,0">
+                    <Button.Resources>
+                        <Style TargetType="Button">
+                            <Setter Property="BorderThickness" Value="0"></Setter>
+                            <Setter Property="Background" Value="Transparent"></Setter>
+                            <Setter Property="Foreground" Value="#eee"></Setter>
+                            <Setter Property="FontSize" Value="10pt"></Setter>
+                            <Setter Property="FontWeight" Value="400"></Setter>
+                            <Setter Property="Padding" Value="2"></Setter>
+                        </Style>
+                    </Button.Resources>
+                    <Image Source="pack://application:,,,/GameEngineApp;component/Images/close.png" Width="16"/>
+                </Button>
+                <Button HorizontalAlignment="Right" Margin="0,8,50,0" VerticalAlignment="Top" Width="44" Click="MaximizeMinimize" Height="24">
+                    <Button.Resources>
+                        <Style TargetType="{x:Type Button}">
+                            <Setter Property="BorderThickness" Value="0"/>
+                            <Setter Property="Background" Value="Transparent"/>
+                            <Setter Property="Foreground" Value="#eee"/>
+                            <Setter Property="FontSize" Value="10pt"/>
+                            <Setter Property="FontWeight" Value="400"/>
+                            <Setter Property="Padding" Value="2"/>
+                        </Style>
+                    </Button.Resources>
+                    <Image x:Name="MaximizeMinimizeButton" Source="pack://application:,,,/GameEngineApp;component/Images/maximize.png"/>
+                </Button>
+                <Button HorizontalAlignment="Right" Margin="0,8,94,0" VerticalAlignment="Top" Width="44" Click="Collapse" Height="24">
+                    <Button.Resources>
+                        <Style TargetType="{x:Type Button}">
+                            <Setter Property="BorderThickness" Value="0"/>
+                            <Setter Property="Background" Value="Transparent"/>
+                            <Setter Property="Foreground" Value="#eee"/>
+                            <Setter Property="FontSize" Value="10pt"/>
+                            <Setter Property="FontWeight" Value="400"/>
+                            <Setter Property="Padding" Value="2"/>
+                        </Style>
+                    </Button.Resources>
+                    <Image Source="pack://application:,,,/GameEngineApp;component/Images/collapse.png" Height="15"/>
+                </Button>
+                <TextBlock Foreground="AliceBlue" FontFamily="montserrat" HorizontalAlignment="Left" Margin="10,0,0,10" TextWrapping="Wrap" Text="v1.0" VerticalAlignment="Bottom"/>
+                <TextBlock FontSize="24pt" Foreground="AliceBlue" FontFamily="montserrat" HorizontalAlignment="Left" Margin="53,18,0,0" TextWrapping="Wrap" Text="GameEngine" VerticalAlignment="Top"/>
+                <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="32" Margin="10,25,0,0" Stroke="Black" VerticalAlignment="Top" Width="32"/>
+            </Grid>
+        </Border>
+    </Grid>
+</Window>

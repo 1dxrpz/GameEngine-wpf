@@ -1,0 +1,39 @@
+﻿<UserControl x:Class="GameEngineApp.LayoutWindows.AssetsWindow"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:GameEngineApp.LayoutWindows"
+             xmlns:icons="clr-namespace:GameEngineApp.LayoutWindows.AssetIcons"
+             mc:Ignorable="d">
+    <UserControl.Resources>
+        <Style TargetType="local:AssetsWindow">
+            <Setter Property="Width" Value="{Binding WindowWidth}"></Setter>
+            <Setter Property="Height" Value="{Binding WindowHeight}"></Setter>
+        </Style>
+    </UserControl.Resources>
+    <Grid Background="Transparent" x:Name="AssetView">
+        <Grid.ContextMenu>
+            <ContextMenu HorizontalAlignment="Right">
+                <MenuItem Header="Create">
+                    <MenuItem Header="GameObject"></MenuItem>
+                </MenuItem>
+            </ContextMenu>
+        </Grid.ContextMenu>
+        <Grid x:Name="AssetGrid">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="100"/>
+                <RowDefinition Height="100"/>
+                <RowDefinition Height="100"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="86"/>
+                <ColumnDefinition Width="86"/>
+                <ColumnDefinition Width="86"/>
+                <ColumnDefinition Width="86"/>
+                <ColumnDefinition Width="86"/>
+                <ColumnDefinition Width="86"/>
+            </Grid.ColumnDefinitions>
+        </Grid>
+    </Grid>
+</UserControl>

@@ -1,0 +1,97 @@
+﻿<Window x:Class="GameEngineApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:GameEngineApp"
+        xmlns:windows="clr-namespace:GameEngineApp.LayoutWindows"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800" WindowState="Maximized">
+    <Grid x:Name="layoutRoot">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/> 
+        </Grid.RowDefinitions>
+        <Menu>
+            <MenuItem Header="File">
+                <MenuItem Header="New"></MenuItem>
+                <MenuItem Header="Open"></MenuItem>
+                <Separator/>
+                <MenuItem Header="Exit"></MenuItem>
+            </MenuItem>
+            <MenuItem Header="Game">
+                <MenuItem Header="Scene" Click="AddScene"></MenuItem>
+                <MenuItem Header="GameObject"></MenuItem>
+                <Separator/>
+                <MenuItem Header="Exit"></MenuItem>
+            </MenuItem>
+            <MenuItem Header="Window">
+                <MenuItem Header="Properties" Click="MenuItem_Properties"></MenuItem>
+                <MenuItem Header="Assets" Click="MenuItem_Assets"></MenuItem>
+            </MenuItem>
+            <MenuItem Header="Layout">
+                <MenuItem Header="Save" Click="SaveLayout"></MenuItem>
+                <MenuItem Header="Load" Click="LoadLayout"></MenuItem>
+            </MenuItem>
+            <MenuItem Header="About"></MenuItem>
+        </Menu>
+        <Menu Margin="0 20 0 0" Background="#ff2d2d30" Foreground="AliceBlue" Height="30" FontSize="20">
+            <MenuItem Header="Build" InputGestureText="Ctrl+O" Click="BuildProject"></MenuItem>
+        </Menu>
+        <DockingManager x:Name="dockManager"
+            Grid.Row="1"
+            AllowMixedOrientation="True"
+            AutoWindowSizeWhenOpened="True"
+            IsVirtualizingAnchorable="True"
+            IsVirtualizingDocument="True">
+            <DockingManager.Theme>
+                <Vs2013DarkTheme></Vs2013DarkTheme>
+            </DockingManager.Theme>
+            <LayoutRoot>
+                <LayoutPanel Orientation="Vertical">
+                    <LayoutPanel>
+                        <LayoutPanel x:Name="LayoutPanel" Orientation="Vertical">
+                            <LayoutAnchorablePane DockMinWidth="200" DockWidth="200">
+                                <LayoutAnchorable Title="Scene Hierarchy">
+                                    <windows:SceneHierarchy></windows:SceneHierarchy>
+                                </LayoutAnchorable>
+                            </LayoutAnchorablePane>
+                        </LayoutPanel>
+                        <LayoutPanel Orientation="Vertical">
+                            <LayoutDocumentPane>
+                                <LayoutDocument Title="MainScene">
+                                    <windows:SceneWindow x:Name="SceneWindow"></windows:SceneWindow>
+                                </LayoutDocument>
+                            </LayoutDocumentPane>
+                        </LayoutPanel>
+                        <LayoutPanel Orientation="Vertical" DockMinWidth="100" DockWidth="250">
+                            <LayoutAnchorablePane>
+                                <LayoutAnchorable Title="Properties">
+                                    <windows:PropertiesWindow></windows:PropertiesWindow>
+                                </LayoutAnchorable>
+                            </LayoutAnchorablePane>
+                            <LayoutAnchorablePane>
+                                <LayoutAnchorable Title="Test">
+                                    
+                                </LayoutAnchorable>
+                            </LayoutAnchorablePane>
+                        </LayoutPanel>
+                    </LayoutPanel>
+                    <LayoutPanel Orientation="Horizontal" DockMinHeight="200" DockHeight="300">
+                        <LayoutAnchorablePane DockMinWidth="200">
+                            <LayoutAnchorable Title="Files">
+                                <windows:ProjectFilesWindow></windows:ProjectFilesWindow>
+                            </LayoutAnchorable>
+                        </LayoutAnchorablePane>
+                        <LayoutAnchorablePane DockMinWidth="200" DockWidth="1400">
+                            <LayoutAnchorable Title="Assets">
+                                <windows:AssetsWindow></windows:AssetsWindow>
+                            </LayoutAnchorable>
+                            <LayoutAnchorable Title="Console"></LayoutAnchorable>
+                        </LayoutAnchorablePane>
+                    </LayoutPanel>
+                </LayoutPanel>
+            </LayoutRoot>
+        </DockingManager>
+    </Grid>
+</Window>

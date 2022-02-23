@@ -1,0 +1,11 @@
+{
+  "profiles": {
+    "TestApp": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "MSBuildSDKsPath": "C:\\Program Files\\dotnet\\sdk\\5.0.403\\Sdks"
+      },
+      "remoteDebugEnabled": false
+    }
+  }
+}
