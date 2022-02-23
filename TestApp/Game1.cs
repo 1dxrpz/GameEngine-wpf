@@ -27,7 +27,6 @@ namespace TestApp
 		protected override void Initialize()
 		{
 			base.Initialize();
-
 			texture = new Texture2D(_graphics.GraphicsDevice, 1, 1);
 			var data = new Color[1] { Color.White };
 			texture.SetData(data);
